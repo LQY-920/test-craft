@@ -15,12 +15,13 @@ Turn a requirements document into a professional, executable test-case document 
 if the user points at an EXISTING test-case document (matches the template structure, contains 执行结果 fields) and wants it executed → EXECUTE mode
 elif the user provides BOTH an existing test-case document and an updated requirement doc, intent = update → GENERATE update mode
 elif a requirement doc is provided or discoverable → GENERATE mode
+elif the user wants to update an existing test-case document but no updated requirement is available → ask which requirement the update should be based on
 else → ask the user for the input document; never invent requirements
 ```
 
 Requirement doc discovery order (GENERATE): explicit path from the user → `docs/superpowers/specs/` → `docs/superpowers/plans/` → PRD/requirement files in the repo root. If several candidates exist, list them and let the user pick. If the requirement is ambiguous or incomplete, ask clarifying questions BEFORE writing cases.
 
-**GENERATE update mode:** when the requirement changed and a test-case document already exists, update that document in place instead of writing a fresh file: add cases for new 功能点, revise cases whose requirement changed, and mark obsolete cases as `- 执行结果: 🗑 已废弃 (YYYY-MM-DD) | 原因: <why>` (never delete them). Preserve existing 执行结果 backfills of cases whose steps and expected results did not change. Update the header's 用例数 and the 需求覆盖矩阵.
+**GENERATE update mode:** when the requirement changed and a test-case document already exists, update that document in place instead of writing a fresh file: add cases for new 功能点, revise cases whose requirement changed, and mark obsolete cases as `- 执行结果: 🗑 已废弃 (YYYY-MM-DD) | 原因: <why>` (never delete them). A revised case's 执行结果 resets to `未执行`; preserve existing backfills only of cases whose steps and expected results did not change. Update the header's 用例数 and the 需求覆盖矩阵 — header 用例数 and 执行汇总 总数 exclude 已废弃 cases.
 
 ## GENERATE mode
 
@@ -54,8 +55,7 @@ Execution contract — follow it exactly:
 - For every ❌ case, append one line to 执行汇总 → 缺陷清单: case id, symptom, actual vs expected.
 - After the run, update the 执行汇总 counts (通过/失败/阻塞/未执行) and 通过率.
 - Default order: P0 → P3. The user may scope the run to a module or priority.
-- Resume support: "继续执行 <文档>" picks up at the first 未执行 case.
 - 通过率 = 通过 ÷ 已执行（通过+失败+阻塞），annotated like `通过率 33%（已执行 3 条）`; ⛔ counts as executed, 🗑 已废弃 cases are excluded from all 执行汇总 counts.
 - 页面 cases for non-browser product forms (小程序 / 桌面程序): if no automation driver is available, mark ⛔ 阻塞 with reason `需人工执行` — never fake execution.
 - If the user gives no document path, discover test-case documents in `docs/tests/`; list candidates if several exist.
-- Resume picks up at the first 未执行 case in P0→P3 order. To re-run a ❌/⛔ case, the user asks for a re-run; then overwrite that case's 执行结果 line with the new result.
+- Resume support: "继续执行 <文档>" picks up at the first 未执行 case in P0→P3 order. To re-run a ❌/⛔ case, the user asks for a re-run; then overwrite that case's 执行结果 line with the new result.
