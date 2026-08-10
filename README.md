@@ -1,5 +1,7 @@
 # test-craft
 
+[![skills.sh](https://skills.sh/b/LQY-920/test-craft)](https://skills.sh/LQY-920/test-craft)
+
 An agent skill that turns a requirements document (PRD, spec, or implementation plan) into a professional, executable test-case document — and then executes it case by case, backfilling results into the same document.
 
 Built for the [superpowers](https://github.com/obra/superpowers) workflow: `brainstorming` → `writing-plans` → development → **test-craft**.
@@ -15,7 +17,26 @@ Built for the [superpowers](https://github.com/obra/superpowers) workflow: `brai
 
 ## Install
 
-Copy the repository into your agent's skills directory, e.g.:
+One command via the [skills](https://skills.sh) CLI (works with Kimi Code CLI, Claude Code, Codex, Cursor, and 70+ agents):
+
+```bash
+npx skills add LQY-920/test-craft
+```
+
+Useful variants:
+
+```bash
+# List skills in the repo without installing
+npx skills add LQY-920/test-craft --list
+
+# Install globally for a specific agent (e.g. Kimi Code CLI)
+npx skills add LQY-920/test-craft -g -a kimi-code-cli
+
+# Update to the latest version later
+npx skills update test-craft
+```
+
+Or clone manually into your agent's skills directory:
 
 ```bash
 git clone https://github.com/LQY-920/test-craft.git ~/.agents/skills/test-craft
