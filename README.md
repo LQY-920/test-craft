@@ -18,7 +18,7 @@ Built for the [superpowers](https://github.com/obra/superpowers) workflow: `brai
 Copy the repository into your agent's skills directory, e.g.:
 
 ```bash
-git clone <repo-url> ~/.agents/skills/test-craft
+git clone https://github.com/LQY-920/test-craft.git ~/.agents/skills/test-craft
 ```
 
 ## Usage
