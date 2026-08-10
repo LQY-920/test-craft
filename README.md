@@ -25,6 +25,7 @@ git clone <repo-url> ~/.agents/skills/test-craft
 
 - Generate: "用 test-craft 根据 docs/superpowers/specs/xxx.md 生成测试用例"
 - Execute: "用 test-craft 执行 docs/tests/2026-08-10-login-testcases.md"
+- Update: "用 test-craft 根据新的需求文档更新 docs/tests/2026-08-10-login-testcases.md"
 - Resume: "继续执行 docs/tests/2026-08-10-login-testcases.md"
 
 See `examples/sample-prd.md` → `examples/sample-testcases.md` for a complete before/after pair.
