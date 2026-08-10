@@ -716,6 +716,8 @@ git add examples/sample-testcases.md
 git commit -m "feat: add sample test-case document with backfill examples"
 ```
 
+> 修订记录（评审后）：用例扩为 11 条（新增 TC-Login_011 覆盖 PRD 3.3 的 token 存储）；TC-Login_001 标题"正确"改"有效"（黑名单）；TC-Login_005 步骤具体化并使用重复类语法；TC-Login_008 预期结果 1-2 展开为可判定描述；汇总更新为 总数 11 | 未执行 8。以仓库中 `examples/sample-testcases.md` 最终内容为准。
+
 ---
 
 ### Task 8: README 与 LICENSE
@@ -856,20 +858,22 @@ Expected: only `cross-ref check done`, no MISSING lines
 
 - [ ] **Step 3: Fuzzy-word self-audit on the example document**
 
-The generated example must not itself violate the blacklist. Run:
+The generated example must not itself violate the blacklist. Run (the authoritative list is §11 of `references/writing-rules.md`; this audit extracts it programmatically):
 
 ```bash
 python -c "
+import re
+rules = open('references/writing-rules.md', encoding='utf-8').read()
+m = re.search(r'## 11\.[^\n]*\n\n[^\n]*\n\n([^\n]+)', rules)
+blacklist = [w for w in m.group(1).split('、') if w]
 t = open('examples/sample-testcases.md', encoding='utf-8').read()
-bad = ['很多','一些','部分','大量','少量','多次','随机','任意','一段时间','特殊','很长','较长','很短','较短','数次','大概','频繁','大约','某些','长时间','假如','或许','可能']
-hits = [w for w in bad if w in t]
-# '错误信息' is blacklisted as a vague expected-result term; ensure it is not used as an expectation
+hits = [w for w in blacklist if w in t]
 assert '无异常' not in t and '无错误' not in t
 print('blacklist hits:', hits if hits else 'none')
 "
 ```
 
-Expected: `blacklist hits: none`. If hits appear, edit the example to use concrete wording and re-run.
+Expected: `blacklist hits: none`. If hits appear, edit the example to use concrete wording and re-run. (Note: the blacklist contains multi-char terms like 错误信息/非法字符 that legitimately appear in checklist/design-method teaching text — this audit applies to the generated example only.)
 
 - [ ] **Step 4: Spec coverage review**
 
