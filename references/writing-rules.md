@@ -8,11 +8,12 @@ Distilled from the Huawei CodeArts TestPlan "测试用例编写规范" (usermanu
 - Cases must be independent of each other. Never use another case as a precondition; using another case's outcome as a precondition is allowed.
 - One case covers ONE test logic. If a flow needs more than 7 steps, split it into multiple cases.
 - Do not explain basic product/testing knowledge inside a case.
+- Every 功能点 in the requirement doc maps to at least one case, recorded in the document's 需求覆盖矩阵.
 
 ## 2. Numbering (编号)
 
 - Format: `TC-<Feature>_<NNN>` where `<Feature>` is the feature's English name from the feature tree (translate if the PRD is Chinese), `<NNN>` is a 3-digit sequence starting at 001.
-- Globally unique within the document. Total length < 40 characters. Separator is `_`.
+- Globally unique within the document. Total length ≤ 40 characters. Separator is `_`.
 
 ## 3. Naming (标题)
 
@@ -32,6 +33,8 @@ Distilled from the Huawei CodeArts TestPlan "测试用例编写规范" (usermanu
 
 Priority reflects the feature's importance to the system, not the story's development priority.
 
+- Every case must also declare its 类型: 接口 | 页面. The type drives the expected-result style (§7) and execution dispatch.
+
 ## 5. Preconditions (前置条件)
 
 - Every case should state its preconditions: environment, account type and permissions, data preparation.
@@ -50,7 +53,7 @@ Priority reflects the feature's importance to the system, not the story's develo
 ## 7. Expected results (预期结果)
 
 - Required. One expected result per step, numbering aligned with the step it checks. When one result has several checkpoints, list them all.
-- Must be decidable pass/fail. Forbidden: "无错误", "无异常", "正常", "正确" without criteria.
+- Must be decidable pass/fail. Forbidden vague verdicts such as "无错误", "无异常"; note §11 bans words like "正常" and "正确" outright.
 - API cases: state the HTTP status code and key response fields/values, e.g. "返回 HTTP 200，body 中 code=0，token 字段非空".
 - Page cases: state the exact message copy, data change, or route, e.g. "页面显示'用户名或密码错误'提示；停留在 /login 不跳转".
 - Storage checks: name the table and key field value changes. Message checks: name the key content.
@@ -58,7 +61,7 @@ Priority reflects the feature's importance to the system, not the story's develo
 
 ## 8. Test data (测试数据)
 
-- Listed in the case's own 测试数据 field, format: `[字段名: 字段值]`. Steps reference the data concretely (the actual value appears in the step where it is used).
+- Listed in the case's own 测试数据 field; multiple entries are listed one by one, format: `[字段名: 字段值]`. Steps use the data concretely (the actual value appears in the step where it is used).
 
 ## 9. Grammar patterns (语法句式)
 
@@ -69,7 +72,7 @@ Priority reflects the feature's importance to the system, not the story's develo
 | 检查类 (expected results) | `检查[对象][属性]为[参数]` | 检查响应字段 code 为 0 |
 | 重复类 | `重复步骤[X]到步骤[Y]，重复N次` | 重复步骤2到步骤3，重复5次 |
 
-Test logic and test data must be separated (data goes into 测试数据, not hard-coded prose).
+Test data must be declared in the 测试数据 field even when values appear in steps — never leave data only embedded in prose.
 
 ## 10. Reserved words (保留字)
 
@@ -92,9 +95,11 @@ These words must never appear in a generated case; replace with concrete values:
 
 After generating the document, verify every case and fix violations on the spot:
 
-1. 编号唯一且符合 `TC-<Feature>_<NNN>`；标题 ≤40 字符、动宾结构、无黑名单词。
-2. 步骤 ≤7 步、每步单一动作、步骤内无断言；预期结果与步骤一一对应。
-3. 每条预期结果可明确判定通过/失败（接口有状态码+字段；页面有具体文案/数据/路由）。
-4. 前置条件具体可执行；测试数据以 `[字段名: 字段值]` 列出。
-5. 优先级分布大致符合 10/30/40/20；需求覆盖矩阵覆盖需求文档全部功能点。
-6. 全文无模糊词黑名单词汇；保留字统一（检查/设置/执行/重复）。
+1. 编号唯一且符合 `TC-<Feature>_<NNN>`；标题唯一（无重复、无包含关系、不仅序号不同）、≤40 字符、动宾结构、无 `_` 以外特殊字符、无 UI 位置描述（如"左上角"）、无黑名单词。
+2. 每条用例声明了 优先级 与 类型（接口|页面）。
+3. 步骤 ≤7 步、每步单一动作、步骤内无断言；预期结果与步骤一一对应。
+4. 每条预期结果可明确判定通过/失败（接口有状态码+字段；页面有具体文案/数据/路由）。
+5. 前置条件具体可执行；步骤依赖的数据已在前置条件中说明；测试数据以 `[字段名: 字段值]` 逐项列出且步骤中使用了具体值。
+6. 用例相互独立：不以其他用例为前置条件（可引用其执行结果）。
+7. 优先级分布大致符合 10/30/40/20；需求覆盖矩阵覆盖需求文档全部功能点。
+8. 全文无模糊词黑名单词汇；保留字统一（检查/设置/执行/重复）。
