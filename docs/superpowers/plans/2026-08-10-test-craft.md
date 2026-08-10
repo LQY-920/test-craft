@@ -207,6 +207,8 @@ git add references/writing-rules.md
 git commit -m "feat: add test case writing rules reference"
 ```
 
+> 修订记录（质量评审后）：§1 增需求覆盖矩阵要求；§2 长度改为 ≤40；§4 增 类型 声明要求；§7/§8/§9 测试数据表述对齐模板独立字段；§11 黑名单补"正确"；§12 自检清单扩为 8 条。以仓库中 `references/writing-rules.md` 最终内容为准。
+
 ---
 
 ### Task 3: 用例设计方法 `references/design-methods.md`
