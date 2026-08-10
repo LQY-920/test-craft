@@ -151,7 +151,7 @@ Priority reflects the feature's importance to the system, not the story's develo
 
 ## 8. Test data (测试数据)
 
-- Listed explicitly inside the step that uses it, format: `[字段名: 字段值]`.
+- Listed in the case's own 测试数据 field, format: `[字段名: 字段值]`. Steps reference the data concretely (the actual value appears in the step where it is used).
 
 ## 9. Grammar patterns (语法句式)
 
