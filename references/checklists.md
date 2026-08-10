@@ -2,6 +2,8 @@
 
 Load during GENERATE step 2 (测试点提取). Pick the section matching the project's 产品形态; turn applicable items into test points. These are the pragmatic subset of ISO/IEC 25010 for solo/small-team projects — NOT the full 9-characteristic matrix. Skip items the requirement doc explicitly rules out, and note why in the 测试点清单.
 
+Note: checklist wording is test-point vocabulary, not case text. When expanding into cases, per writing-rules §11 instantiate concrete, decidable wording (e.g. turn "页面状态正确" into the specific expected state).
+
 ## 网站 (Website)
 
 - 浏览器兼容: Chrome、Edge 最新版（Safari 视用户群）
@@ -33,8 +35,8 @@ Load during GENERATE step 2 (测试点提取). Pick the section matching the pro
 
 ## 接口（所有形态通用）
 
-- 认证: 无 token / 过期 token / 伪造 token 调用受保护接口返回 401
+- 认证: 无 token / 过期 token / 伪造 token 调用受保护接口返回 401（需求另有鉴权约定的从其约定）
 - 越权: 用 A 用户身份请求 B 用户的资源被拒绝
 - 参数校验: 缺必填参数、参数类型错误、超长字符串、SQL/XSS 注入字符
 - 幂等: 同一请求重复提交不产生重复数据
-- 状态码语义: 业务失败返回约定的错误码结构，不是一律 200
+- 状态码语义: 业务失败返回约定的错误码结构（HTTP 层与业务码的约定以需求文档为准）
