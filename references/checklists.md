@@ -13,6 +13,7 @@ Note: checklist wording is test-point vocabulary, not case text. When expanding 
 - 浏览器行为: 刷新、前进、后退后页面状态正确
 - 重复提交: 表单快速双击、网络慢时重复点击只产生一条记录
 - 响应时间: 关键接口/页面在可接受阈值内（默认页面 < 3s，接口 < 1s，需求另有约定从其约定）
+- 界面检查: 元素显示、文案拼写、交互反馈（加载态/空态/错误提示/禁用态）、跳转与导航
 
 ## 小程序 (Mini-program)
 

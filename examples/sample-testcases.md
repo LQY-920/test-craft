@@ -53,7 +53,7 @@
 
 - 优先级: P2 | 类型: 接口
 - 前置条件: 已注册用户，[username: lock@example.com]，[password: Abc12345]，账号未锁定
-- 测试数据: [username: lock@example.com] [password: Wrong1234] [password: Abc12345]
+- 测试数据: [username: lock@example.com] [错误密码: Wrong1234] [有效密码: Abc12345]
 - 测试步骤:
   1. POST /api/login，body 为 `{"username": "lock@example.com", "password": "Wrong1234"}`
   2. 重复步骤1到步骤1，重复4次
@@ -125,7 +125,7 @@
 ### TC-Login_010 登录态_token过期访问dashboard_跳回登录页
 
 - 优先级: P1 | 类型: 页面
-- 前置条件: 已成功登录过一次；设置 localStorage 中 token 为一个已过期的 token 值
+- 前置条件: 已成功登录过一次；设置 localStorage 中 token 为 expired-token-value
 - 测试数据: [token: expired-token-value]
 - 测试步骤:
   1. 在地址栏访问 /dashboard
