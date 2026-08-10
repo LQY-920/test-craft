@@ -1,0 +1,8 @@
+# OS / editor noise
+.DS_Store
+__pycache__/
+.idea/
+.vscode/
+
+# Internal process docs (specs, plans) — local only, not part of the skill
+docs/
