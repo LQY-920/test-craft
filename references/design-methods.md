@@ -15,8 +15,12 @@ Example — password field requires 8-20 chars of letters+digits:
 |-------|------|----------------|
 | 8-20 位字母+数字 | 有效 | `abc12345` |
 | <8 位 | 无效 | `ab12` |
-| >20 位 | 无效 | 21 位串 |
-| 纯字母 / 纯数字 / 含特殊字符 | 无效 | `abcdefgh` / `12345678` / `abc123!@` |
+| >20 位 | 无效 | `abc12345abc12345abc12` |
+| 纯字母 | 无效 | `abcdefgh` |
+| 纯数字 | 无效 | `12345678` |
+| 含特殊字符 | 无效 | `abc123!@` |
+
+Note: method names and class labels above are teaching vocabulary. Per writing-rules §11 they must not appear in generated case text — always instantiate concrete values.
 
 ## 2. 边界值分析 (Boundary value analysis)
 
@@ -63,5 +67,5 @@ Example — 登录: 账号存在? × 密码正确? × 账号锁定? →
 - Input fields → 等价类 + 边界值 first.
 - Multi-condition logic → 判定表.
 - Multi-step flows → 场景法.
-- Always layer 错误推测 on top for the triggers listed above.
+- Layer 错误推测 on top, applying the triggers listed above where they are relevant to the test point.
 - Merge cases that would be duplicates or full equivalents (去重).
